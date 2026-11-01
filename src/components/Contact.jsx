@@ -1,16 +1,37 @@
 import { useEffect, useState } from 'react';
 import { FaGithub, FaLinkedinIn, FaInstagram, FaWhatsapp } from 'react-icons/fa';
 import { SiFiverr, SiUpwork } from 'react-icons/si';
-import { LINKS, WHATSAPP } from '../data';
 import Reveal from './Reveal';
 
-const icons = { GitHub: FaGithub, LinkedIn: FaLinkedinIn, Fiverr: SiFiverr, Upwork: SiUpwork, Instagram: FaInstagram, WhatsApp: FaWhatsapp };
+// Live links data array
+const LINKS = [
+  { name: 'GitHub', url: 'https://github.com/kasd933d' },
+  { name: 'LinkedIn', url: 'https://www.linkedin.com/in/abdullah-malik-31a6713a7/' },
+  { name: 'Fiverr', url: 'https://www.fiverr.com/abdullah_full/buying?source=avatar_menu_profile' },
+  { name: 'Upwork', url: 'https://www.upwork.com/freelancers/~01231d62a86fcff1e0' },
+  { name: 'Instagram', url: 'https://www.instagram.com/azudev_/' },
+  { name: 'WhatsApp', url: 'https://wa.me/923376569894' },
+];
+
+const WHATSAPP_LINK = 'https://wa.me/923376569894';
+
+const icons = { 
+  GitHub: FaGithub, 
+  LinkedIn: FaLinkedinIn, 
+  Fiverr: SiFiverr, 
+  Upwork: SiUpwork, 
+  Instagram: FaInstagram, 
+  WhatsApp: FaWhatsapp 
+};
 
 export default function Contact() {
   const [time, setTime] = useState('');
+
   useEffect(() => {
     const tick = () => setTime(new Date().toLocaleTimeString('en-GB', { timeZone: 'Asia/Karachi' }));
-    tick(); const t = setInterval(tick, 1000); return () => clearInterval(t);
+    tick(); 
+    const t = setInterval(tick, 1000); 
+    return () => clearInterval(t);
   }, []);
 
   return (
@@ -20,13 +41,19 @@ export default function Contact() {
         <span>Pakistan // {time} PKT</span>
       </Reveal>
 
-      <Reveal><h2 className="text-[14vw] font-bold leading-[0.88] tracking-tighter md:text-[10vw]">Let's build<br /><span className="text-[#d7ff64]">stuff.</span></h2></Reveal>
+      <Reveal>
+        <h2 className="text-[14vw] font-bold leading-[0.88] tracking-tighter md:text-[10vw]">
+          Let's build<br /><span className="text-[#d7ff64]">stuff.</span>
+        </h2>
+      </Reveal>
 
       <div className="mt-20 grid gap-16 lg:grid-cols-[1fr_1.2fr]">
         <Reveal>
           <p className="mono mb-4 text-sm uppercase text-[#e9f1ec]/50">Elsewhere</p>
           <p className="mb-8 max-w-sm text-[#e9f1ec]/60">Fiverr ya Upwork pe hire karo, ya seedha WhatsApp karo.</p>
-          <a href={WHATSAPP} target="_blank" rel="noopener noreferrer" className="btn">Start a project ↗</a>
+          <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="btn">
+            Start a project ↗
+          </a>
         </Reveal>
         <div>
           {LINKS.map(({ name, url }, i) => {
@@ -34,7 +61,10 @@ export default function Contact() {
             return (
               <Reveal key={name} delay={i * 70}>
                 <a href={url} target="_blank" rel="noopener noreferrer" className="row">
-                  <span className="flex items-center gap-5 text-3xl font-bold md:text-5xl"><Icon className="text-2xl md:text-3xl" />{name}</span>
+                  <span className="flex items-center gap-5 text-3xl font-bold md:text-5xl">
+                    {Icon && <Icon className="text-2xl md:text-3xl" />}
+                    {name}
+                  </span>
                   <span className="arr text-3xl">↗</span>
                 </a>
               </Reveal>
